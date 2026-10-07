@@ -25,6 +25,7 @@ declare module "micromark-util-types" {
 }
 
 const DOLLAR = 36;
+const BACKTICK = 96;
 const BACKSLASH = 92;
 const RIGHT_PAREN = 41;
 const RIGHT_BRACKET = 93;
@@ -104,7 +105,15 @@ function mathText(delimiter: typeof DOLLAR | typeof BACKSLASH): Construct {
           last = code;
           return between;
         }
-        if (code === delimiter) return effects.attempt(closing, after, data)(code);
+        // A single-dollar opener must not scan past another dollar or into code
+        // while looking for a closer (for example: prices followed by `$x$`).
+        if (code === BACKTICK && delimiter === DOLLAR && size === 1) return nok(code);
+        if (code === delimiter)
+          return effects.attempt(
+            closing,
+            after,
+            delimiter === DOLLAR && size === 1 ? nok : data,
+          )(code);
         return data(code);
       }
 
@@ -128,6 +137,7 @@ function mathText(delimiter: typeof DOLLAR | typeof BACKSLASH): Construct {
       }
 
       function inside(code: Code): State | undefined {
+        if (code === BACKTICK && delimiter === DOLLAR && size === 1) return nok(code);
         const failedRun = code === DOLLAR && last === DOLLAR;
         if (
           code === null ||

@@ -89,6 +89,16 @@ describe("chat math parsing", () => {
     expect(formulas("Pay \\$$x$ now.")).toEqual([["inline", "x"]]);
   });
 
+  it("does not join prices or shell variables to later math or inline code", () => {
+    for (const prefix of ["Prices: $5 and $10,", "Use $HOME,", "Cost $5,"]) {
+      const markdown = `${prefix} then use \`$x^2$\` and $y^2$.`;
+      expect(formulas(markdown)).toEqual([["inline", "y^2"]]);
+      expect(collect(parse(markdown)).filter((node) => node.type === "inlineCode")).toMatchObject([
+        { value: "$x^2$" },
+      ]);
+    }
+  });
+
   it("keeps TeX escapes inside formulas", () => {
     expect(formulas("Cost $a\\$b$ and \\(\\left(x\\right)\\).")).toEqual([
       ["inline", "a\\$b"],

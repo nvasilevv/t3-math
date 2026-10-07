@@ -25,6 +25,7 @@ import {
   resolveLatestMergeBackRun,
 } from "@t3tools/client-runtime/state/thread-workflows";
 import type { EnvironmentId, OrchestrationV2ThreadShell, ThreadId } from "@t3tools/contracts";
+import { deriveSubagentElapsedMs } from "@t3tools/shared/orchestrationTiming";
 import { groupBy } from "effect/Array";
 import * as DateTime from "effect/DateTime";
 import { useNavigate } from "@tanstack/react-router";
@@ -440,8 +441,8 @@ export function ThreadRelationshipsPanel(props: {
                     <ArrowRightIcon className="size-3 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
                   )}
                   {/* One trailing item keeps room for the title: the icon dot already
-                      carries status, so a started agent shows only its time. */}
-                  {agent?.startedAt && !failed ? (
+                      carries status, so an agent with a known time shows only that. */}
+                  {agent && !failed && deriveSubagentElapsedMs(agent, 0) !== null ? (
                     <span
                       className={`shrink-0 text-2xs font-normal tabular-nums text-muted-foreground ${canStop ? "group-hover:opacity-0 group-focus-within:opacity-0 pointer-coarse:opacity-0 [@media(hover:none)]:opacity-0" : ""}`}
                     >

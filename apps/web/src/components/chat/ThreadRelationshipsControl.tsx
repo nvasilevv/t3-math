@@ -382,6 +382,7 @@ export function ThreadRelationshipsPanel(props: {
                 isSubagent && !isParent ? subagentsByThreadId.get(threadId) : undefined,
                 node?.thread,
               );
+              const failed = status === "failed" || status === "error";
               const canStop =
                 agent?.origin === "app_owned" &&
                 agent.startedAt &&
@@ -435,19 +436,21 @@ export function ThreadRelationshipsPanel(props: {
                       {threadTitle}
                     </span>
                   </span>
-                  {agent ? (
-                    agent.startedAt ? (
-                      <span
-                        className={`shrink-0 text-2xs font-normal tabular-nums text-muted-foreground ${canStop ? "group-hover:opacity-0 group-focus-within:opacity-0 pointer-coarse:opacity-0 [@media(hover:none)]:opacity-0" : ""}`}
-                      >
-                        <AgentElapsed agent={agent} />
-                      </span>
-                    ) : null
-                  ) : (
+                  {agent ? null : (
                     <ArrowRightIcon className="size-3 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
                   )}
-                  {!isMergeTarget ? (
-                    <span className="shrink-0 text-2xs text-muted-foreground">
+                  {/* One trailing item keeps room for the title: the icon dot already
+                      carries status, so a started agent shows only its time. */}
+                  {agent?.startedAt && !failed ? (
+                    <span
+                      className={`shrink-0 text-2xs font-normal tabular-nums text-muted-foreground ${canStop ? "group-hover:opacity-0 group-focus-within:opacity-0 pointer-coarse:opacity-0 [@media(hover:none)]:opacity-0" : ""}`}
+                    >
+                      <AgentElapsed agent={agent} compact />
+                    </span>
+                  ) : !isMergeTarget ? (
+                    <span
+                      className={`shrink-0 text-2xs ${failed ? "text-destructive" : "text-muted-foreground"}`}
+                    >
                       {threadRelationshipStatusLabel(status)}
                     </span>
                   ) : null}

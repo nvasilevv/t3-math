@@ -31,8 +31,9 @@ applies to the web and desktop clients.
 
 ## Math
 
-On web and desktop, turn on **Render math** in **Settings → Appearance** to typeset LaTeX in
-messages and Markdown previews. It reads `$…$`, `$$…$$`, `\(…\)`, and `\[…\]`, outside of code.
+T3 Math typesets LaTeX in messages and Markdown previews by default, including in Safari on
+your phone. Turn off **Render math** in **Settings → Appearance** to show ordinary Markdown.
+It reads `$…$`, `$$…$$`, `\(…\)`, and `\[…\]`, outside of code.
 Dollar amounts such as `$5 and $10` stay text; write `\$` to keep any other dollar sign literal.
 Copying a formula copies its TeX. The mobile app shows the TeX source.
 

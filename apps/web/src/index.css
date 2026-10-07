@@ -1769,6 +1769,7 @@ code {
 
 .chat-markdown .chat-markdown-math-display .katex-display {
   margin: 0;
+  min-width: max-content;
 }
 
 .chat-markdown .chat-markdown-math-source {

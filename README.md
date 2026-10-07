@@ -1,4 +1,19 @@
-# T3 Code
+# T3 Math
+
+Personal browser-only fork of [T3 Code](https://github.com/pingdotgg/t3code), with LaTeX math
+enabled by default. Open the same server in a desktop browser or Safari on your phone over
+Tailscale; no custom desktop or iPhone app is needed.
+
+Supports inline and display equations, matrices, aligned expressions, scrollable wide equations,
+and copying TeX. Disable rendering in **Settings → Appearance → Render math** if needed.
+Native mobile clients are unchanged.
+
+See [running T3 Math](docs/operations/t3-math.md) for isolated hosting and updates.
+The math implementation builds on Hjalmar Karlsen's [PR #14574](https://github.com/pingdotgg/t3code/pull/14574).
+Original MIT license and attribution are retained. The installation commands below install
+**upstream T3 Code**, not this fork.
+
+## Upstream T3 Code
 
 T3 Code is an "agent harness control surface". It enables control of the agents on your machine with a best-in-class mobile app ([iOS](https://apps.apple.com/us/app/t3-code-remote-claude-more/id6787819824), [Android](https://play.google.com/store/apps/details?id=com.t3tools.t3code)), [web app](https://app.t3.codes) and [Electron-based desktop app](https://t3.codes).
 

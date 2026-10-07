@@ -8,7 +8,8 @@ Supports inline and display equations, matrices, aligned expressions, scrollable
 and copying TeX. Disable rendering in **Settings → Appearance → Render math** if needed.
 Native mobile clients are unchanged.
 
-See [running T3 Math](docs/operations/t3-math.md) for isolated hosting and updates.
+**[Quick start: build, run, and pair through Tailscale](docs/operations/t3-math.md)**
+includes copy-and-paste commands for hosting alongside your existing T3 Code installation.
 The math implementation builds on Hjalmar Karlsen's [PR #14574](https://github.com/pingdotgg/t3code/pull/14574).
 Original MIT license and attribution are retained. The installation commands below install
 **upstream T3 Code**, not this fork.
